@@ -1,0 +1,53 @@
+<header class="navbar" [class.scrolled]="scrolled()">
+  <div class="container bar">
+    <a href="#top" class="logo" (click)="closeMenu()">
+      <span class="mark">&lt;</span>MS<span class="mark">/&gt;</span>
+    </a>
+
+    <nav class="links desktop-only" aria-label="Primary">
+      @for (link of links; track link.href) {
+        <a [href]="link.href">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="actions">
+      <a
+        class="icon-btn desktop-only"
+        [href]="personal.githubUrl"
+        target="_blank"
+        rel="noopener"
+        aria-label="GitHub profile"
+      >
+        <app-icon name="github" [size]="19" />
+      </a>
+      <app-theme-switcher class="desktop-only" />
+      <a class="btn btn-primary btn-sm desktop-only" href="#contact">Let's talk</a>
+
+      <button
+        type="button"
+        class="icon-btn menu-toggle"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle menu"
+      >
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="22" />
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <div class="mobile-panel">
+      <nav aria-label="Mobile">
+        @for (link of links; track link.href) {
+          <a [href]="link.href" (click)="closeMenu()">{{ link.label }}</a>
+        }
+      </nav>
+      <div class="mobile-footer">
+        <a [href]="personal.githubUrl" target="_blank" rel="noopener" class="icon-btn" aria-label="GitHub profile">
+          <app-icon name="github" [size]="19" />
+        </a>
+        <app-theme-switcher />
+      </div>
+    </div>
+  }
+</header>

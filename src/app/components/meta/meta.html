@@ -1,0 +1,16 @@
+<a [href]="personal.githubUrl" target="_blank" rel="noopener" class="row">
+  <span class="icon-wrap"><app-icon name="github" [size]="18" /></span>
+  <span class="text">
+    <strong>{{ repoCount }} repos</strong>
+    <span>on GitHub</span>
+  </span>
+  <app-icon name="external" [size]="15" class="ext" />
+</a>
+
+<a [href]="'mailto:' + personal.email" class="row">
+  <span class="icon-wrap"><app-icon name="mail" [size]="18" /></span>
+  <span class="text">
+    <strong>Email</strong>
+    <span>{{ personal.email }}</span>
+  </span>
+</a>

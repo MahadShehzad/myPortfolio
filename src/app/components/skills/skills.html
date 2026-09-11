@@ -1,0 +1,12 @@
+<div class="cols">
+  @for (group of groups(); track group.category) {
+    <div class="col">
+      <p class="cat">{{ group.category }}</p>
+      <div class="chips">
+        @for (item of group.items; track item) {
+          <span class="chip">{{ item }}</span>
+        }
+      </div>
+    </div>
+  }
+</div>

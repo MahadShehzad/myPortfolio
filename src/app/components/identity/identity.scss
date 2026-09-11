@@ -1,0 +1,84 @@
+:host {
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.badge {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px dashed color-mix(in srgb, var(--primary) 45%, transparent);
+  animation: spin 16s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.initials {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.who h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.role {
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--primary);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+.pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 60%, transparent);
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.location {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

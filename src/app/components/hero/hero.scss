@@ -1,0 +1,54 @@
+:host {
+  justify-content: center;
+  gap: 18px;
+}
+
+.hero-eyebrow {
+  color: var(--on-primary);
+  opacity: 0.75;
+}
+
+h1 {
+  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+}
+
+.typed {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--on-primary) 40%, transparent);
+  text-underline-offset: 4px;
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.lead {
+  color: color-mix(in srgb, var(--on-primary) 75%, transparent);
+  max-width: 440px;
+  font-size: 0.98rem;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.hero-btn {
+  border-color: color-mix(in srgb, var(--on-primary) 30%, transparent);
+  color: var(--on-primary);
+}
+
+.hero-btn:hover {
+  border-color: var(--on-primary);
+  color: var(--on-primary);
+  background: color-mix(in srgb, var(--on-primary) 12%, transparent);
+}

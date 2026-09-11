@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+main {
+  display: block;
+  padding-top: 96px;
+}
+
+@media (max-width: 640px) {
+  main {
+    padding-top: 84px;
+  }
+}

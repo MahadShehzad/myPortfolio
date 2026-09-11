@@ -1,0 +1,84 @@
+<div class="grid">
+  <div class="intro">
+    <p class="eyebrow">Contact</p>
+    <h2>
+      Let's build something <span class="gradient-text">great together</span>
+    </h2>
+    <p class="desc">
+      Have a project, role, or idea in mind? My inbox is open — I usually reply within a day or two.
+    </p>
+
+    <div class="info">
+      <a [href]="'mailto:' + personal.email" class="info-row">
+        <app-icon name="mail" [size]="16" />
+        {{ personal.email }}
+      </a>
+      <a [href]="personal.githubUrl" target="_blank" rel="noopener" class="info-row">
+        <app-icon name="github" [size]="16" />
+        {{ personal.githubUrl }}
+      </a>
+    </div>
+  </div>
+
+  <form class="form" (ngSubmit)="submit()">
+    <div class="row">
+      <label>
+        <span>Name</span>
+        <input
+          type="text"
+          name="name"
+          required
+          [ngModel]="name()"
+          (ngModelChange)="name.set($event)"
+          placeholder="Your name"
+          [disabled]="status() === 'sending'"
+        />
+      </label>
+      <label>
+        <span>Email</span>
+        <input
+          type="email"
+          name="email"
+          required
+          [ngModel]="senderEmail()"
+          (ngModelChange)="senderEmail.set($event)"
+          placeholder="you@example.com"
+          [disabled]="status() === 'sending'"
+        />
+      </label>
+    </div>
+
+    <label>
+      <span>Message</span>
+      <textarea
+        name="message"
+        rows="3"
+        required
+        [ngModel]="message()"
+        (ngModelChange)="message.set($event)"
+        placeholder="Tell me about your project..."
+        [disabled]="status() === 'sending'"
+      ></textarea>
+    </label>
+
+    <div class="row submit-row">
+      <button type="submit" class="btn btn-primary" [disabled]="status() === 'sending'">
+        @if (status() === 'sending') {
+          Sending...
+        } @else {
+          Send Message
+          <app-icon name="send" [size]="16" />
+        }
+      </button>
+
+      @if (status() === 'success') {
+        <p class="status status-success">Thanks! I'll get back to you soon.</p>
+      }
+      @if (status() === 'error') {
+        <p class="status status-error">
+          Couldn't send. Email me directly at <a [href]="'mailto:' + personal.email">{{ personal.email }}</a>.
+        </p>
+      }
+    </div>
+  </form>
+</div>

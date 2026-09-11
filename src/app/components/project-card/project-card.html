@@ -1,0 +1,31 @@
+<div class="thumb">
+  @if (project().image) {
+    <img [src]="project().image" [alt]="project().title + ' screenshot'" />
+  } @else {
+    <span class="thumb-initials">{{ initials() }}</span>
+  }
+</div>
+
+<div class="body">
+  <h3>{{ project().title }}</h3>
+  <p>{{ project().description }}</p>
+
+  <div class="tech">
+    @for (t of project().tech.slice(0, 4); track t) {
+      <span class="chip">{{ t }}</span>
+    }
+  </div>
+
+  <div class="links">
+    <a [href]="project().repo" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+      <app-icon name="code" [size]="15" />
+      Code
+    </a>
+    @if (project().demo) {
+      <a [href]="project().demo" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+        Live Demo
+        <app-icon name="external" [size]="14" />
+      </a>
+    }
+  </div>
+</div>

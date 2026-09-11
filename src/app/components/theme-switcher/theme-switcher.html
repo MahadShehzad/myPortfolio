@@ -1,0 +1,42 @@
+<div class="switcher">
+  <button
+    type="button"
+    class="trigger"
+    (click)="toggle()"
+    [attr.aria-expanded]="open()"
+    aria-label="Change color theme"
+  >
+    <app-icon name="palette" [size]="18" />
+    <span class="dots">
+      @for (c of themeService.themes[0].swatch; track c) {
+        <span class="dot" [style.background]="c"></span>
+      }
+    </span>
+  </button>
+
+  @if (open()) {
+    <div class="panel" role="menu">
+      <p class="panel-title">Pick a vibe</p>
+      @for (theme of themeService.themes; track theme.id) {
+        <button
+          type="button"
+          class="option"
+          role="menuitemradio"
+          [attr.aria-checked]="theme.id === themeService.current()"
+          [class.active]="theme.id === themeService.current()"
+          (click)="select(theme.id)"
+        >
+          <span class="swatch">
+            @for (c of theme.swatch; track c) {
+              <span [style.background]="c"></span>
+            }
+          </span>
+          <span class="labels">
+            <span class="name">{{ theme.label }}</span>
+            <span class="vibe">{{ theme.vibe }}</span>
+          </span>
+        </button>
+      }
+    </div>
+  }
+</div>

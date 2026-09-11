@@ -1,0 +1,75 @@
+:host {
+  padding: 0;
+}
+
+.thumb {
+  height: 96px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient);
+  position: relative;
+  overflow: hidden;
+}
+
+.thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.25), transparent 60%);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumb-initials {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--on-primary);
+  opacity: 0.85;
+}
+
+.body {
+  padding: var(--tile-pad);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.body h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.body p {
+  font-size: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 14px;
+}
+
+.tech .chip {
+  padding: 4px 9px;
+  font-size: 0.65rem;
+}
+
+.links {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+}

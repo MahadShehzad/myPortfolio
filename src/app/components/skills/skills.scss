@@ -1,0 +1,36 @@
+:host {
+  justify-content: center;
+}
+
+.cols {
+  display: flex;
+  gap: 22px;
+  height: 100%;
+}
+
+.col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cat {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--primary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 5px 10px;
+  font-size: 0.68rem;
+}

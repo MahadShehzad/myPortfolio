@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="container inner">
+    <a href="#top" class="logo">
+      <span class="mark">&lt;</span>MS<span class="mark">/&gt;</span>
+    </a>
+
+    <nav class="links" aria-label="Footer">
+      @for (link of links; track link.href) {
+        <a [href]="link.href">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="social">
+      <a [href]="personal.githubUrl" target="_blank" rel="noopener" aria-label="GitHub">
+        <app-icon name="github" [size]="18" />
+      </a>
+      <a [href]="'mailto:' + personal.email" aria-label="Email">
+        <app-icon name="mail" [size]="18" />
+      </a>
+    </div>
+  </div>
+  <p class="copy">© {{ year }} {{ personal.name }}. Built with Angular.</p>
+</footer>

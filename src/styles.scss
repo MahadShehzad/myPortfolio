@@ -1,1 +1,347 @@
-/* You can add global styles to this file, and also import other style files */
+/* ==========================================================================
+   Global styles + theme system
+   5 curated themes (duotone accent pairs, not a generic rainbow-neon trio)
+   are defined as CSS custom properties on [data-theme="..."]. ThemeService
+   toggles the attribute on <html>; every component reads these variables.
+   ========================================================================== */
+
+// ---- Default theme: Cobalt Blaze -----------------------------------------
+:root,
+[data-theme='cobalt-blaze'] {
+  --bg: #070a16;
+  --bg-alt: #0a0e1e;
+  --surface: #0e1428;
+  --surface-2: #141b36;
+  --text: #eef2ff;
+  --text-muted: #97a2c9;
+  --primary: #3f7bff;
+  --secondary: #ff9142;
+  --on-primary: #050813;
+  --border: rgba(238, 242, 255, 0.1);
+  --gradient: linear-gradient(135deg, #3f7bff 0%, #ff9142 100%);
+  --shadow-glow: 0 0 44px rgba(63, 123, 255, 0.2);
+}
+
+// ---- Citrus Punch ----------------------------------------------------
+[data-theme='citrus-punch'] {
+  --bg: #0d0b08;
+  --bg-alt: #121009;
+  --surface: #17140d;
+  --surface-2: #1f1b11;
+  --text: #fbf8f0;
+  --text-muted: #b3a894;
+  --primary: #d4ff3f;
+  --secondary: #ff4d4d;
+  --on-primary: #12100a;
+  --border: rgba(251, 248, 240, 0.1);
+  --gradient: linear-gradient(135deg, #d4ff3f 0%, #ff4d4d 100%);
+  --shadow-glow: 0 0 44px rgba(212, 255, 63, 0.16);
+}
+
+// ---- Plum Rose --------------------------------------------------------
+[data-theme='plum-rose'] {
+  --bg: #150a14;
+  --bg-alt: #190d18;
+  --surface: #20101e;
+  --surface-2: #2a1627;
+  --text: #fdf1fa;
+  --text-muted: #c9a6c2;
+  --primary: #ff3d7f;
+  --secondary: #ffb703;
+  --on-primary: #1a0a12;
+  --border: rgba(253, 241, 250, 0.1);
+  --gradient: linear-gradient(135deg, #ff3d7f 0%, #ffb703 100%);
+  --shadow-glow: 0 0 44px rgba(255, 61, 127, 0.2);
+}
+
+// ---- Forest Signal ------------------------------------------------------
+[data-theme='forest-signal'] {
+  --bg: #070f0a;
+  --bg-alt: #0a130c;
+  --surface: #0e1a11;
+  --surface-2: #142417;
+  --text: #eefbf0;
+  --text-muted: #9bc0a4;
+  --primary: #7cff6b;
+  --secondary: #2fd8ff;
+  --on-primary: #071108;
+  --border: rgba(238, 251, 240, 0.1);
+  --gradient: linear-gradient(135deg, #7cff6b 0%, #2fd8ff 100%);
+  --shadow-glow: 0 0 44px rgba(124, 255, 107, 0.16);
+}
+
+// ---- Ink Mono+ (single-accent, restrained) -------------------------------
+[data-theme='ink-mono'] {
+  --bg: #08090b;
+  --bg-alt: #0b0c0f;
+  --surface: #111216;
+  --surface-2: #17181d;
+  --text: #f4f5f7;
+  --text-muted: #8c8f98;
+  --primary: #ff3b30;
+  --secondary: #ff7a6e;
+  --on-primary: #14100f;
+  --border: rgba(244, 245, 247, 0.1);
+  --gradient: linear-gradient(135deg, #ff3b30 0%, #ff7a6e 100%);
+  --shadow-glow: 0 0 44px rgba(255, 59, 48, 0.18);
+}
+
+// ---- Shared, theme-independent tokens ------------------------------------
+:root {
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --container: 1220px;
+  --radius: 20px;
+  --radius-sm: 12px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bento-row: 160px;
+  --bento-gap: 18px;
+}
+
+// ---- Reset ----------------------------------------------------------------
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-2);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+// ---- Layout helpers ---------------------------------------------------
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+// ---- Buttons ---------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease), border-color 0.25s var(--ease);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: var(--on-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -6px rgba(0, 0, 0, 0.5), var(--shadow-glow);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+// ---- Chips ------------------------------------------------------
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+// ---- Bento grid ------------------------------------------------------
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: var(--bento-row);
+  gap: var(--bento-gap);
+  padding-block: 28px 80px;
+}
+
+.tile {
+  --tile-pad: 22px;
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: var(--tile-pad);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.tile:hover {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  transform: translateY(-3px);
+  box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.6);
+}
+
+.tile-vivid {
+  background: var(--gradient);
+  color: var(--on-primary);
+  border-color: transparent;
+}
+
+.tile-vivid p,
+.tile-vivid .text-muted {
+  color: color-mix(in srgb, var(--on-primary) 75%, transparent);
+}
+
+.tile-2x2 { grid-column: span 2; grid-row: span 2; }
+.tile-2x1 { grid-column: span 2; grid-row: span 1; }
+.tile-1x2 { grid-column: span 1; grid-row: span 2; }
+.tile-1x1 { grid-column: span 1; grid-row: span 1; }
+.tile-4x3 { grid-column: span 4; grid-row: span 3; }
+
+// ---- Reveal-on-scroll animation --------------------------------------
+.reveal {
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@media (max-width: 1080px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tile-4x3 {
+    grid-column: span 2;
+    grid-row: span 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 18px;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+  }
+
+  .tile-2x2, .tile-2x1, .tile-1x2, .tile-1x1, .tile-4x3 {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: 180px;
+  }
+}

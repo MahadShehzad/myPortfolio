@@ -1,0 +1,13 @@
+<p class="eyebrow">Focus Areas</p>
+
+<div class="areas">
+  @for (area of areas; track area.title) {
+    <div class="area">
+      <div class="icon-wrap">
+        <app-icon [name]="area.icon" [size]="18" />
+      </div>
+      <h3>{{ area.title }}</h3>
+      <p>{{ area.description }}</p>
+    </div>
+  }
+</div>
