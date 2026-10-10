@@ -1,59 +1,60 @@
-# MyPortfolio
+# Mahad Shehzad — Portfolio
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.5.
+[![Deploy to GitHub Pages](https://github.com/MahadShehzad/myPortfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/MahadShehzad/myPortfolio/actions/workflows/deploy.yml)
 
-## Development server
+My personal developer portfolio, built with **Angular** as a responsive bento-grid ("mosaic") layout.
 
-To start a local development server, run:
+**Live site:** https://mahadshehzad.github.io/myPortfolio/
 
-```bash
-ng serve
-```
+## Highlights
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Bento-mosaic layout:** about, skills, services, projects and contact appear as tiles that reflow from a multi-column grid on desktop to a single column on phones.
+- **Five colour themes:** Cobalt Blaze, Citrus Punch, Plum Rose, Forest Signal and Ink Mono+. Switch with one click; the choice is remembered in `localStorage`.
+- **Working contact form:** messages are delivered by email through [Web3Forms](https://web3forms.com), with no backend to host.
+- **Scroll-reveal animations** via a lightweight directive, plus a custom inline SVG icon set (no icon-font download).
+- **Modern Angular:** standalone components, signals and `OnPush` change detection throughout.
+- **Automatic deployment:** every push to `master` builds the site and publishes it to GitHub Pages.
 
-## Code scaffolding
+## Tech stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Area      | Tools                                         |
+| --------- | --------------------------------------------- |
+| Framework | Angular (standalone components, signals)      |
+| Language  | TypeScript, SCSS                              |
+| Forms     | Angular Forms + Web3Forms API                 |
+| Hosting   | GitHub Pages via GitHub Actions               |
+| Tests     | Vitest                                        |
 
-```bash
-ng generate component component-name
-```
+## Getting started
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Requires Node.js 22.22+ or 24.15+.
 
 ```bash
-ng test
+npm install
+npm start          # http://localhost:4200
+npm run build      # production build → dist/myPortfolio/browser
+npm test           # unit tests
 ```
 
-## Running end-to-end tests
+## Making it yours
 
-For end-to-end (e2e) testing, run:
+All content lives in one file: [`src/app/core/portfolio-data.ts`](src/app/core/portfolio-data.ts).
+Edit your name, bio, skills, services, projects and links there; no component changes are needed.
 
-```bash
-ng e2e
+The contact form needs a free Web3Forms access key: create one at [web3forms.com](https://web3forms.com)
+and set `WEB3FORMS_ACCESS_KEY` in the same file. Web3Forms keys are designed to be public in client-side code.
+
+## Project structure
+
+```
+src/app/
+├── components/      One folder per tile: hero, about, skills, services, projects, contact,
+│                    navbar, footer, theme-switcher …
+├── core/            portfolio-data.ts (all content) and theme.service.ts
+└── shared/          icon set and the scroll-reveal directive
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Deployment
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds with `--base-href /myPortfolio/` and publishes
+`dist/myPortfolio/browser` to GitHub Pages on every push to `master` (or manually from the Actions tab).
